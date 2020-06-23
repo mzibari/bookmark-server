@@ -6,7 +6,7 @@ const bookmarkRouter = express.Router()
 const bodyParser = express.json()
 
 bookmarkRouter
-    .route('/bookmarks').get((req, res) => {
+    .route('/bookmarks').get(bodyParser,(req, res) => {
         res.send(bookmarks)
     })
     .post(bodyParser, (req, res) => {
@@ -56,7 +56,7 @@ bookmarkRouter
     })
 
 bookmarkRouter
-    .route('/bookmarks/:id').get((req, res) => {
+    .route('/bookmarks/:id').get(bodyParser,(req, res) => {
         const { id } = req.params;
         const bookmark = bookmarks.find(b => b.id == id);
 
@@ -68,7 +68,7 @@ bookmarkRouter
         }
         res.json(bookmark)
     })
-    .delete((req, res) => {
+    .delete(bodyParser,(req, res) => {
         const { id } = req.params;
 
         const bookmarkIndex = bookmarks.findIndex(b => b.id == id);
